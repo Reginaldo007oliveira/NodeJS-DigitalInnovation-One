@@ -1,10 +1,15 @@
 const express = require('express')
-const   userRoute = require('./routes/userRoute')
-const app = express()
+const bodyParser = require('body-parser')
+
+const usersRoute = require('./routes/usersRoute')
 const port = 3000
 
-userRoute(app)
+const app = express()
 
-app.get('/', (req, res)=> res.send('Olá mundo pelo express') )
+app.use(bodyParser.urlencoded({ extended: false }))
 
-app.listen(port, () => console.log('app rodando na porta 3000'))
+usersRoute(app)
+
+app.get('/', (req, res) => res.send('Olá mundo!'))
+
+app.listen(port, () => console.log(`Express rodando na porta ${port}`)) 
